@@ -1,0 +1,12 @@
+<!-- Generated template for the MisAvisosListRowComponent component -->
+
+<ion-item>
+  <ion-thumbnail item-start>
+    <img src="img/thumbnail-totoro.png">
+  </ion-thumbnail>
+  <h2>Titulo de Aviso</h2>
+  <h4>{{aviso.descripcion}}</h4>
+  <p>Fecha de Publicacion</p>
+  <button ion-button clear item-end (click)="modificarAviso(aviso)"><ion-icon name="create"></ion-icon></button>
+  <button ion-button clear item-end (click)="showConfirm()"><ion-icon name="close"></ion-icon></button>
+</ion-item>
