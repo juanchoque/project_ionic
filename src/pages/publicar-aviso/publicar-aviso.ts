@@ -19,13 +19,15 @@ declare var google;
 export class PublicarAvisoPage {
   map: any;
   activeWindow: any;
+  markers = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PublicarAvisoPage');
-    this.loadMap(null);
+    //if(typeof google == "undefined" || typeof google.maps == "undefined"){
+      this.loadMap(null);
+    //}
   }
 
   publicarAviso(){
@@ -50,6 +52,38 @@ export class PublicarAvisoPage {
       mapEle.classList.add('show-map');
     });
 
+    this.map.addListener('click', (event) =>  {
+
+      for (var i = 0; i < this.markers.length; i++) {
+          this.markers[i].setMap(null);
+      }
+      this.markers.length = 0;//fin eliminar
+
+      var latitude = event.latLng.lat();//position.coords.latitude;
+      let longitude = event.latLng.lng();
+      //var longitude = e.latLng.lng();
+      var posicion = new google.maps.LatLng(latitude, longitude);
+      
+      var dogwalkMarker = new google.maps.Marker(
+      {
+          position: posicion, 
+          title: "descrpcion"
+      });
+      
+      dogwalkMarker.setMap(this.map);
+
+      this.markers.push(dogwalkMarker);//para eliminar
+    });
+
+    var posicion = new google.maps.LatLng(-17.372904, -66.144320);
+    
+    var dogwalkMarker = new google.maps.Marker(
+    {
+        position: posicion, 
+        title: "descrpcion"
+    });
+    dogwalkMarker.setMap(this.map);
+    this.markers.push(dogwalkMarker);//para eliminar
   }
 
 }
