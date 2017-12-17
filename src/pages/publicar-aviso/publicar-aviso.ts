@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geoposition } from '@ionic-native/geolocation';
+import { Aviso } from '../../models/aviso';
+import { AvisosServicesProvider } from '../../providers/avisos-services/avisos-services';
 
 /**
  * Generated class for the PublicarAvisoPage page.
@@ -21,17 +23,32 @@ export class PublicarAvisoPage {
   activeWindow: any;
   markers = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  //model para registro de aviso
+  aviso: Aviso = new Aviso(0, '', 0, 0);
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public avisosServicesProvider: AvisosServicesProvider) {
+
   }
 
   ionViewDidLoad() {
     //if(typeof google == "undefined" || typeof google.maps == "undefined"){
-      this.loadMap(null);
+      //this.loadMap(null);
     //}
   }
 
   publicarAviso(){
-    alert("Registra en la nuve");
+    //alert(">>" + this.aviso.descripcion + ">>" + this.aviso.precio + ">>" + this.aviso.telefono + ">>" + this.aviso.direccion);
+    let titulo = this.aviso.descripcion;
+    if(this.aviso.descripcion.length >= 20){
+      titulo = this.aviso.descripcion.substring(0,20);
+    }
+    this.aviso.titulo = titulo;
+    
+    this.avisosServicesProvider.agregarAviso(this.aviso);
+    this.navCtrl.pop();
   }
 
   //cargar mapa

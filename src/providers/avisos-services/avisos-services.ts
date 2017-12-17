@@ -22,4 +22,11 @@ export class AvisosServicesProvider {
     return this.avisos;
   }
 
+  //regitro en base de datos
+  public agregarAviso(aviso: Aviso): boolean{
+    this.avisos.push(aviso);
+    //this.avisos = [new Aviso(1,'En alquiler departamento de tres ambientes',-17.372904,-66.144320),new Aviso(2,'Duena venta casa por motivos de traslado preco charlable',-17.372330,-66.146562)];
+    return true;
+  }
+
 }
