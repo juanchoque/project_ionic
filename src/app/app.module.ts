@@ -19,6 +19,16 @@ import { PublicarAvisoPage } from '../pages/publicar-aviso/publicar-aviso';
 import { DetalleAvisoPage } from '../pages/detalle-aviso/detalle-aviso';
 import { RegistrarCuentaPage } from '../pages/registrar-cuenta/registrar-cuenta';
 import { OpconesPage } from '../pages/opcones/opcones';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyCnL8JbpBHqOm6u36u4h8KjnMgxUkscVK4",
+  authDomain: "inmobiliariavirtual-42c8e.firebaseapp.com",
+  databaseURL: "https://inmobiliariavirtual-42c8e.firebaseio.com",
+  projectId: "inmobiliariavirtual-42c8e",
+  storageBucket: "inmobiliariavirtual-42c8e.appspot.com",
+  messagingSenderId: "977567910476"
+};
 
 @NgModule({
   declarations: [
@@ -36,7 +46,8 @@ import { OpconesPage } from '../pages/opcones/opcones';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,7 +68,8 @@ import { OpconesPage } from '../pages/opcones/opcones';
     SplashScreen,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AvisosServicesProvider
+    AvisosServicesProvider,
+    HttpClient
   ]
 })
 export class AppModule {}

@@ -22,9 +22,12 @@ export class PublicarAvisoPage {
   map: any;
   activeWindow: any;
   markers = [];
+  latitudCocha: Number = -17.372904;
+  longitudCocha: Number = -66.144320;
+
 
   //model para registro de aviso
-  aviso: Aviso = new Aviso(0, '', 0, 0);
+  aviso: Aviso = new Aviso(0, '', this.latitudCocha, this.longitudCocha);
 
   constructor(
     public navCtrl: NavController, 
@@ -35,30 +38,17 @@ export class PublicarAvisoPage {
 
   ionViewDidLoad() {
     //if(typeof google == "undefined" || typeof google.maps == "undefined"){
-      //this.loadMap(null);
+      this.loadMap(null);
     //}
-  }
-
-  publicarAviso(){
-    //alert(">>" + this.aviso.descripcion + ">>" + this.aviso.precio + ">>" + this.aviso.telefono + ">>" + this.aviso.direccion);
-    let titulo = this.aviso.descripcion;
-    if(this.aviso.descripcion.length >= 20){
-      titulo = this.aviso.descripcion.substring(0,20);
-    }
-    this.aviso.titulo = titulo;
-    
-    this.avisosServicesProvider.agregarAviso(this.aviso);
-    this.navCtrl.pop();
   }
 
   //cargar mapa
   loadMap(position: Geoposition){
-    let latitude = -17.372904;//position.coords.latitude;
-    let longitude = -66.144320;//position.coords.longitude;
-    console.log(latitude, longitude);
     
-    let mapEle: HTMLElement = document.getElementById('map');
-    let myLatLng = {lat: latitude, lng: longitude};
+    console.log(this.latitudCocha, this.longitudCocha);
+    
+    let mapEle: HTMLElement = document.getElementById('mapp');
+    let myLatLng = {lat: this.latitudCocha, lng: this.longitudCocha};
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
       zoom: 14
@@ -78,6 +68,11 @@ export class PublicarAvisoPage {
 
       var latitude = event.latLng.lat();//position.coords.latitude;
       let longitude = event.latLng.lng();
+
+      //cargando para el registro en base de datos
+      this.aviso.latitud = latitude;
+      this.aviso.longitud = longitude;
+
       //var longitude = e.latLng.lng();
       var posicion = new google.maps.LatLng(latitude, longitude);
       
@@ -101,6 +96,19 @@ export class PublicarAvisoPage {
     });
     dogwalkMarker.setMap(this.map);
     this.markers.push(dogwalkMarker);//para eliminar
+  }
+
+  //metodo para registro en base de datos
+  publicarAviso(){
+    //alert(">>" + this.aviso.descripcion + ">>" + this.aviso.precio + ">>" + this.aviso.telefono + ">>" + this.aviso.direccion + ">>" + this.aviso.latitud + ">>" + this.aviso.longitud);
+    let titulo = this.aviso.descripcion;
+    if(this.aviso.descripcion.length >= 20){
+      titulo = this.aviso.descripcion.substring(0,20);
+    }
+    this.aviso.titulo = titulo;
+    
+    this.avisosServicesProvider.agregarAviso(this.aviso);
+    this.navCtrl.pop();
   }
 
 }
