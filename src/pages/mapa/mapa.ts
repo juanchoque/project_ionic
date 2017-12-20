@@ -29,17 +29,21 @@ export class MapaPage {
     public navParams: NavParams,
     private geolocation: Geolocation,
     public avisosServicesProvider: AvisosServicesProvider) {
+      let suscriptor = avisosServicesProvider.listaAvisos().subscribe(data => {
+        this.avisos = data;
+        this.cargarAvisos();
+     });
   }
 
   ionViewDidLoad(){
     //this.getPosition();
-    this.buscarAvisos();
+    //this.buscarAvisos();
     this.loadMap(null);
   }
 
   // funcion para recuperar datos desde servicio
   buscarAvisos(){
-    this.avisos = this.avisosServicesProvider.listaAvisos();
+    //this.avisos = this.avisosServicesProvider.listaAvisos();
   }
 
   // funcion para recuperar posicion de gps
@@ -71,7 +75,7 @@ export class MapaPage {
       mapEle.classList.add('show-map');
     });
 
-    this.cargarAvisos();//insertar los avisos
+    //this.cargarAvisos();//insertar los avisos
 
   }
 

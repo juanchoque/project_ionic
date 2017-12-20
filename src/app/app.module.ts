@@ -20,6 +20,9 @@ import { DetalleAvisoPage } from '../pages/detalle-aviso/detalle-aviso';
 import { RegistrarCuentaPage } from '../pages/registrar-cuenta/registrar-cuenta';
 import { OpconesPage } from '../pages/opcones/opcones';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireAuthModule, AngularFireAuth} from 'angularfire2/auth';
+import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/database';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCnL8JbpBHqOm6u36u4h8KjnMgxUkscVK4",
@@ -47,7 +50,10 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -69,7 +75,9 @@ export const firebaseConfig = {
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AvisosServicesProvider,
-    HttpClient
+    HttpClient,
+    AngularFireDatabase,
+    AngularFireAuth
   ]
 })
 export class AppModule {}

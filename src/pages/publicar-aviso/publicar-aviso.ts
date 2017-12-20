@@ -106,8 +106,9 @@ export class PublicarAvisoPage {
       titulo = this.aviso.descripcion.substring(0,20);
     }
     this.aviso.titulo = titulo;
+    this.aviso.fecPublicacion = new Date();
     
-    this.avisosServicesProvider.agregarAviso(this.aviso);
+    this.avisosServicesProvider.publicarAviso(this.aviso);
     this.navCtrl.pop();
   }
 

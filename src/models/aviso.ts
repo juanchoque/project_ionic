@@ -25,5 +25,6 @@ export class Aviso {
         this.descripcion = descripcion;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.fecPublicacion = new Date();
       }
 }

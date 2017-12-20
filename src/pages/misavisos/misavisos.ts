@@ -25,14 +25,13 @@ export class MisavisosPage {
     public navParams: NavParams,
     public avisosServicesProvider: AvisosServicesProvider,
     public popoverCtrl: PopoverController) {
+      let suscriptor = avisosServicesProvider.listaAvisos().subscribe(data => {
+        this.avisos = data;
+     });
   }
 
   ionViewDidLoad() {
-    this.cargarAvisos();
-  }
-
-  private cargarAvisos(){
-    this.avisos = this.avisosServicesProvider.listaAvisos();
+    //this.cargarAvisos();
   }
 
   //funcion para publicar avisos
