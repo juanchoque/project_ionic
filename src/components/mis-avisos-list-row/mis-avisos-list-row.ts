@@ -25,7 +25,7 @@ export class MisAvisosListRowComponent {
 
   //funcion para modificar los datos
   modificarAviso(aviso: Aviso){
-    this.navCtrl.push(PublicarAvisoPage);
+    this.navCtrl.push(PublicarAvisoPage, {aviso: aviso});
   }
 
   //funcion para confirmacion para eliminar datos

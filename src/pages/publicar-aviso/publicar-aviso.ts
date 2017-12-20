@@ -33,7 +33,9 @@ export class PublicarAvisoPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public avisosServicesProvider: AvisosServicesProvider) {
-
+      this.aviso = navParams.get('aviso');
+      this.latitudCocha = this.aviso.latitud;
+      this.longitudCocha = this.aviso.longitud;
   }
 
   ionViewDidLoad() {
@@ -87,7 +89,7 @@ export class PublicarAvisoPage {
       this.markers.push(dogwalkMarker);//para eliminar
     });
 
-    var posicion = new google.maps.LatLng(-17.372904, -66.144320);
+    var posicion = new google.maps.LatLng(this.latitudCocha, this.longitudCocha);
     
     var dogwalkMarker = new google.maps.Marker(
     {
